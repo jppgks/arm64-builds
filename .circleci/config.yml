@@ -11,6 +11,7 @@ jobs:
   build-ray:
     machine:
       image: ubuntu-2004:202101-01
+      docker_layer_caching: true
     resource_class: arm.medium
     steps:
       - setup
