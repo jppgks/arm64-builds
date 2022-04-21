@@ -24,3 +24,8 @@ jobs:
           command: |
             docker build -t jppgks/ray-arm64 --build-arg PYTHON_VERSION=3.7 -f ray.Dockerfile .
             docker push jppgks/ray-arm64
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build-ray
