@@ -8,7 +8,7 @@ commands:
           command: |
             sudo apt-get update
 jobs:
-  build-medium:
+  build-ray:
     machine:
       image: ubuntu-2004:202101-01
     resource_class: arm.medium
@@ -21,12 +21,12 @@ jobs:
       - run:
           name: Build docker image and push
           command: |
-            docker build -t jppgks/test-arm64 -f test.Dockerfile .
-            docker push jppgks/test-arm64
+            docker build -t jppgks/ray-arm64 --build-arg PYTHON_VERSION=3.7 -f ray.Dockerfile .
+            docker push jppgks/ray-arm64
 workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build-medium:
+      - build-ray:
           context:
             - DOCKER_HUB
