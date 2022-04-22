@@ -23,7 +23,7 @@ RUN mkdir -p ${HOME}/ludwig && git clone https://github.com/ludwig-ai/ludwig.git
     HOROVOD_WITHOUT_MPI=1 \
     HOROVOD_WITHOUT_TENSORFLOW=1 \
     HOROVOD_WITHOUT_MXNET=1 \
-    python -m pip install -e '.[audio,image,text,viz,horovod,dask,ray,hyperopt]' && \
+    python -m pip install -e '.[audio,image,text,viz,distributed,hyperopt]' && \
     horovodrun --check-build && \
     python -c "import horovod.torch; horovod.torch.init(); import ludwig"
 
