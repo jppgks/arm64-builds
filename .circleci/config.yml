@@ -24,7 +24,7 @@ jobs:
           command: |
             export RAY_TAG=ray-1.12.0
             export PYTHON_VERSION=3.8
-            docker build -t jppgks/ray-arm64:${RAY_TAG} --build-arg PYTHON_VERSION=${PYTHON_VERSION} --build-arg RAY_TAG=${RAY_TAG} -f ray.Dockerfile .
+            docker build -t jppgks/ray-arm64:${PYTHON_VERSION}-${RAY_TAG} --build-arg PYTHON_VERSION=${PYTHON_VERSION} --build-arg RAY_TAG=${RAY_TAG} -f ray.Dockerfile .
             docker push jppgks/ray-arm64:${PYTHON_VERSION}-${RAY_TAG}
   build-torchvision-0-12:
     machine:
@@ -42,7 +42,7 @@ jobs:
           command: |
             export TORCHVISION_VERSION=0.12
             export PYTHON_VERSION=3.8
-            docker build -t jppgks/torchvision-arm64:${TORCHVISION_VERSION} --build-arg PYTHON_VERSION=${PYTHON_VERSION} --build-arg TORCHVISION_BRANCH=release/${TORCHVISION_VERSION} -f torchvision.Dockerfile .
+            docker build -t jppgks/torchvision-arm64:${PYTHON_VERSION}-${TORCHVISION_VERSION} --build-arg PYTHON_VERSION=${PYTHON_VERSION} --build-arg TORCHVISION_BRANCH=release/${TORCHVISION_VERSION} -f torchvision.Dockerfile .
             docker push jppgks/torchvision-arm64:${PYTHON_VERSION}-${TORCHVISION_VERSION}
   build-ludwig-master:
     machine:
