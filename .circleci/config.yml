@@ -61,7 +61,7 @@ jobs:
             export PYTHON_VERSION=3.8
             export TORCHVISION_TAG=3.8-0.12
             export TORCHVISION_WHEEL=torchvision-0.12.0a0+9b5a3fe-cp38-cp38-linux_aarch64.whl
-            export RAY_TAG=3.8-1.12.0
+            export RAY_TAG=3.8-ray-1.12.0
             export RAY_WHEEL=ray-1.12.0-cp38-cp38-linux_aarch64.whl
             docker build -t jppgks/ludwig-arm64 --build-arg PYTHON_VERSION=${PYTHON_VERSION} --build-arg TORCHVISION_TAG=${TORCHVISION_TAG} --build-arg TORCHVISION_WHEEL=${TORCHVISION_WHEEL} --build-arg RAY_TAG=${RAY_TAG} --build-arg RAY_WHEEL=${RAY_WHEEL} -f ludwig.Dockerfile .
             docker push jppgks/ludwig-arm64
