@@ -15,8 +15,8 @@ RUN python -m pip --no-cache-dir install "${RAY_WHEEL}[all]" --find-links=. && r
 
 RUN python -m pip install -U pip wheel && python -m pip install torch
 
-ARG TORCHVISION_WHEEL="torchvision-0.12.0a0+9b5a3fe-cp38-cp38-linux_aarch64.whl"
-COPY --from=jppgks/torchvision-arm64:3.8-0.12 /tmp/torchvision/dist .
+ARG TORCHVISION_WHEEL="torchvision-0.11.0a0+e7ec7e2-cp38-cp38-linux_aarch64.whl"
+COPY --from=jppgks/torchvision-arm64:3.8-v0.11.2 /tmp/torchvision/dist .
 RUN python -m pip --no-cache-dir install ${TORCHVISION_WHEEL} --find-links=. && rm *.whl
 
 # all Ludwig extras except 'serve', 'test' since neuropod dependency has no arm64 release
