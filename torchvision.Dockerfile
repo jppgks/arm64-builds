@@ -9,9 +9,9 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     g++ \
     cmake
 
-RUN python -m pip install -U pip wheel && python -m pip install torch 
+RUN python -m pip install -U pip wheel && python -m pip install torch==1.10.1 
 WORKDIR /tmp
-ARG TORCHVISION_BRANCH=release/0.12
+ARG TORCHVISION_BRANCH=v0.11.2
 RUN git clone --branch ${TORCHVISION_BRANCH} https://github.com/pytorch/vision torchvision && cd torchvision && python setup.py bdist_wheel
 
 RUN ls /tmp/torchvision/dist
