@@ -13,7 +13,7 @@ ARG RAY_WHEEL="ray-1.12.0-cp38-cp38-linux_aarch64.whl"
 COPY --from=jppgks/ray-arm64:3.8-ray-1.12.0 /tmp/ray/python/dist/ .
 RUN python -m pip --no-cache-dir install "${RAY_WHEEL}[all]" --find-links=. && rm *.whl
 
-RUN python -m pip install -U pip wheel && python -m pip install torch
+RUN python -m pip install -U pip wheel && python -m pip install torch==1.10.1
 
 ARG TORCHVISION_WHEEL="torchvision-0.11.0a0+e7ec7e2-cp38-cp38-linux_aarch64.whl"
 COPY --from=jppgks/torchvision-arm64:3.8-v0.11.2 /tmp/torchvision/dist .
@@ -25,7 +25,7 @@ RUN mkdir -p ${HOME}/ludwig && git clone https://github.com/ludwig-ai/ludwig.git
     HOROVOD_WITHOUT_MPI=1 \
     HOROVOD_WITHOUT_TENSORFLOW=1 \
     HOROVOD_WITHOUT_MXNET=1 \
-    python -m pip install -e '.[audio,image,text,viz,distributed,hyperopt]' && \
+    python -m pip install -e '.[viz,distributed,hyperopt]' && \
     horovodrun --check-build && \
     python -c "import horovod.torch; horovod.torch.init(); import ludwig"
 
