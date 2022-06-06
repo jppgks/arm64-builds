@@ -9,8 +9,8 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     g++ \
     cmake
 
-ARG RAY_WHEEL="ray-1.12.0-cp38-cp38-linux_aarch64.whl"
-COPY --from=jppgks/ray-arm64:3.8-ray-1.12.0 /tmp/ray/python/dist/ .
+ARG RAY_WHEEL="ray-1.12.1-cp38-cp38-linux_aarch64.whl"
+COPY --from=jppgks/ray-arm64:3.8-ray-1.12.1 /tmp/ray/python/dist/ .
 RUN python -m pip --no-cache-dir install "${RAY_WHEEL}[all]" --find-links=. && rm *.whl
 
 RUN python -m pip install -U pip wheel && python -m pip install torch==1.11.0 --extra-index-url https://download.pytorch.org/whl/cpu
