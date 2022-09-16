@@ -25,7 +25,7 @@ jobs:
       - run:
           name: Build docker image and push
           command: |
-            export RAY_TAG=<< parameters.message >>
+            export RAY_TAG=<< parameters.RAY_TAG >>
             export PYTHON_VERSION=3.8
             docker build -t jppgks/ray-arm64:${PYTHON_VERSION}-${RAY_TAG} --build-arg PYTHON_VERSION=${PYTHON_VERSION} --build-arg RAY_TAG=${RAY_TAG} -f ray.Dockerfile .
             docker push jppgks/ray-arm64:${PYTHON_VERSION}-${RAY_TAG}
