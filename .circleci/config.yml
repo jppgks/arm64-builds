@@ -8,11 +8,14 @@ commands:
           command: |
             sudo apt-get update
 jobs:
-  build-ray-1-12-1:
+  build-ray:
     machine:
       image: ubuntu-2004:202101-01
       docker_layer_caching: true
     resource_class: arm.medium
+    parameters:
+      RAY_TAG:
+        type: string
     steps:
       - setup
       - run:
@@ -22,7 +25,7 @@ jobs:
       - run:
           name: Build docker image and push
           command: |
-            export RAY_TAG=ray-1.12.1
+            export RAY_TAG=<< parameters.message >>
             export PYTHON_VERSION=3.8
             docker build -t jppgks/ray-arm64:${PYTHON_VERSION}-${RAY_TAG} --build-arg PYTHON_VERSION=${PYTHON_VERSION} --build-arg RAY_TAG=${RAY_TAG} -f ray.Dockerfile .
             docker push jppgks/ray-arm64:${PYTHON_VERSION}-${RAY_TAG}
@@ -64,7 +67,8 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build-ray-1-12-1
+      - build-ray:
+        RAY_TAG: ["ray-1.12.1", "ray-2.0.0"]
       - build-torchvision-0-12-0
       - build-ludwig-master
   nightly:
